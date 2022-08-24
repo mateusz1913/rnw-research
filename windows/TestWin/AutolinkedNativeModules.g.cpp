@@ -3,12 +3,121 @@
 #include "pch.h"
 #include "AutolinkedNativeModules.g.h"
 
+// Includes from @fluentui-react-native/experimental-expander
+#include <winrt/ReactNativeExpander.h>
+
+// Includes from @react-native-async-storage/async-storage
+#include <winrt/ReactNativeAsyncStorage.h>
+
+// Includes from @react-native-clipboard/clipboard
+#include <winrt/NativeClipboard.h>
+
+// Includes from @react-native-community/checkbox
+#include <winrt/CheckboxWindows.h>
+
+// Includes from @react-native-community/datetimepicker
+#include <winrt/DateTimePicker.h>
+
+// Includes from @react-native-community/netinfo
+#include <winrt/ReactNativeNetInfo.h>
+
+// Includes from @react-native-community/progress-view
+#include <winrt/progress_view.h>
+
+// Includes from @react-native-community/slider
+#include <winrt/SliderWindows.h>
+
+// Includes from @react-native-picker/picker
+#include <winrt/ReactNativePicker.h>
+
+// Includes from react-native-blob-util
+#include <winrt/ReactNativeBlobUtil.h>
+
+// Includes from react-native-camera
+#include <winrt/ReactNativeCameraCPP.h>
+
+// Includes from react-native-code-push
+#include <winrt/Microsoft.CodePush.ReactNative.h>
+
+// Includes from react-native-config
+#include <winrt/RNCConfig.h>
+
+// Includes from react-native-device-info
+#include <winrt/RNDeviceInfoCPP.h>
+
+// Includes from react-native-linear-gradient
+#include <winrt/BVLinearGradient.h>
+
+// Includes from react-native-localize
+#include <winrt/RNLocalize.h>
+
+// Includes from react-native-orientation-locker
+#include <winrt/OrientationWindows.h>
+
+// Includes from react-native-permissions
+#include <winrt/RNPermissions.h>
+
+// Includes from react-native-print
+#include <winrt/RNPrint.h>
+
+// Includes from react-native-sensitive-info
+#include <winrt/RNSensitiveInfoCPP.h>
+
+// Includes from react-native-video
+#include <winrt/ReactNativeVideoCPP.h>
+
+// Includes from react-native-webview
+#include <winrt/ReactNativeWebView.h>
+
 namespace winrt::Microsoft::ReactNative
 {
 
 void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collections::IVector<winrt::Microsoft::ReactNative::IReactPackageProvider> const& packageProviders)
 { 
-    UNREFERENCED_PARAMETER(packageProviders);
+    // IReactPackageProviders from @fluentui-react-native/experimental-expander
+    packageProviders.Append(winrt::ReactNativeExpander::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-async-storage/async-storage
+    packageProviders.Append(winrt::ReactNativeAsyncStorage::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-clipboard/clipboard
+    packageProviders.Append(winrt::NativeClipboard::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-community/checkbox
+    packageProviders.Append(winrt::CheckboxWindows::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-community/datetimepicker
+    packageProviders.Append(winrt::DateTimePicker::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-community/netinfo
+    packageProviders.Append(winrt::ReactNativeNetInfo::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-community/progress-view
+    packageProviders.Append(winrt::progress_view::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-community/slider
+    packageProviders.Append(winrt::SliderWindows::ReactPackageProvider());
+    // IReactPackageProviders from @react-native-picker/picker
+    packageProviders.Append(winrt::ReactNativePicker::ReactPackageProvider());
+    // IReactPackageProviders from react-native-blob-util
+    packageProviders.Append(winrt::ReactNativeBlobUtil::ReactPackageProvider());
+    // IReactPackageProviders from react-native-camera
+    packageProviders.Append(winrt::ReactNativeCameraCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-code-push
+    packageProviders.Append(winrt::Microsoft::CodePush::ReactNative::ReactPackageProvider());
+    // IReactPackageProviders from react-native-config
+    packageProviders.Append(winrt::RNCConfig::ReactPackageProvider());
+    // IReactPackageProviders from react-native-device-info
+    packageProviders.Append(winrt::RNDeviceInfoCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-linear-gradient
+    packageProviders.Append(winrt::BVLinearGradient::ReactPackageProvider());
+    // IReactPackageProviders from react-native-localize
+    packageProviders.Append(winrt::RNLocalize::ReactPackageProvider());
+    // IReactPackageProviders from react-native-orientation-locker
+    packageProviders.Append(winrt::OrientationWindows::ReactPackageProvider());
+    // IReactPackageProviders from react-native-permissions
+    packageProviders.Append(winrt::RNPermissions::ReactPackageProvider());
+    // IReactPackageProviders from react-native-print
+    packageProviders.Append(winrt::RNPrint::ReactPackageProvider());
+    // IReactPackageProviders from react-native-sensitive-info
+    packageProviders.Append(winrt::RNSensitiveInfoCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-video
+    packageProviders.Append(winrt::ReactNativeVideoCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-webview
+    packageProviders.Append(winrt::ReactNativeWebView::ReactPackageProvider());
 }
 
 }
