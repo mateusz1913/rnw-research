@@ -10,6 +10,8 @@ import { VideoScreen } from '../screens/VideoScreen';
 import { VideoPlayerScreen } from '../screens/VideoPlayerScreen';
 import { FlyoutScreen } from '../screens/FlyoutScreen';
 import { VideoAudioScreen } from '../screens/VideoAudioScreen';
+import { AsyncStorageScreen } from '../screens/AsyncStorageScreen';
+import { SensitiveInfoScreen } from '../screens/SensitiveInfoScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -35,6 +37,14 @@ export const NavigationStack: React.FC = () => {
       />
       <Stack.Screen name={ROUTES.FLYOUT} component={FlyoutScreen} />
       <Stack.Screen name={ROUTES.VIDEO_AUDIO} component={VideoAudioScreen} />
+      <Stack.Screen
+        name={ROUTES.ASYNC_STORAGE}
+        component={AsyncStorageScreen}
+      />
+      <Stack.Screen
+        name={ROUTES.SENSITIVE_INFO}
+        component={SensitiveInfoScreen}
+      />
     </Stack.Navigator>
   );
 };

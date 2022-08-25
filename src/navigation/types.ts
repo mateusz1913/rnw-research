@@ -13,6 +13,8 @@ export type RootStackParamList = {
   };
   [ROUTES.FLYOUT]: undefined;
   [ROUTES.VIDEO_AUDIO]: undefined;
+  [ROUTES.ASYNC_STORAGE]: undefined;
+  [ROUTES.SENSITIVE_INFO]: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;

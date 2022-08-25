@@ -76,6 +76,14 @@ export const HomeScreen: React.FC = () => {
       <Section onPress={navigateTo(ROUTES.VIDEO_AUDIO)} title="AudioVideo">
         Listen audio with native component from react-native-video
       </Section>
+      <Section onPress={navigateTo(ROUTES.ASYNC_STORAGE)} title="AsyncStorage">
+        Look how AsyncStorage can be used to persist data
+      </Section>
+      <Section
+        onPress={navigateTo(ROUTES.SENSITIVE_INFO)}
+        title="SensitiveInfo">
+        Use react-native-sensitive-info to store credentials in secure way
+      </Section>
     </Page>
   );
 };
