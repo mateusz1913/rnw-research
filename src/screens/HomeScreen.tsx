@@ -41,7 +41,12 @@ export const HomeScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const navigateTo = React.useCallback(
-    (route: typeof ROUTES[keyof typeof ROUTES]) => {
+    (
+      route: Exclude<
+        typeof ROUTES[keyof typeof ROUTES],
+        typeof ROUTES.VIDEO_PLAYER
+      >,
+    ) => {
       return () => navigation.navigate(route);
     },
     [navigation],
@@ -53,20 +58,23 @@ export const HomeScreen: React.FC = () => {
         Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen
         and then come back to see your edits.
       </Section>
-      <Section
-        onPress={navigateTo(ROUTES.LOCALIZE)}
-        title="react-native-localize">
+      <Section onPress={navigateTo(ROUTES.LOCALIZE)} title="Localize">
         Check react-native-localize library
       </Section>
-      <Section
-        onPress={navigateTo(ROUTES.WEBVIEW)}
-        title="react-native-webview">
+      <Section onPress={navigateTo(ROUTES.WEBVIEW)} title="WebView">
         Check WebView component with react-native-webview
       </Section>
-      <Section
-        onPress={navigateTo(ROUTES.CHECKBOX)}
-        title="@react-native-community/checkbox">
-        Try Checkbox component
+      <Section onPress={navigateTo(ROUTES.CHECKBOX)} title="Checkbox">
+        Try Checkbox component from @react-native-community/checkbox
+      </Section>
+      <Section onPress={navigateTo(ROUTES.VIDEO)} title="Video">
+        Watch video presented with native component from react-native-video
+      </Section>
+      <Section onPress={navigateTo(ROUTES.FLYOUT)} title="Flyout">
+        Check Flyout examples (Modal specific components in RNW)
+      </Section>
+      <Section onPress={navigateTo(ROUTES.VIDEO_AUDIO)} title="AudioVideo">
+        Listen audio with native component from react-native-video
       </Section>
     </Page>
   );
@@ -74,7 +82,7 @@ export const HomeScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
+    marginVertical: 16,
     paddingHorizontal: 24,
   },
   sectionTitle: {
