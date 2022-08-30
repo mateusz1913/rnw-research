@@ -6856,10 +6856,9 @@ react-native-sensitive-info@6.0.0-alpha.9:
   resolved "https://registry.yarnpkg.com/react-native-sensitive-info/-/react-native-sensitive-info-6.0.0-alpha.9.tgz#b488fab715d36efdf80b377a21545cfe888ab8d2"
   integrity sha512-W2R1gUHgBAmy+wVl0BvA7s01SqqTitnG4Sdj2zmck0OS5a54kq+pTnXRqDljMa2NQs4Mue2IHyvd+Tf0X1ZL6Q==
 
-react-native-track-player@^3.1.0:
+react-native-track-player@doublesymmetry/react-native-track-player:
   version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-3.1.0.tgz#683f862dee01058169121101f73d6d23c0540a06"
-  integrity sha512-IJBprPO2YVA/iMgI317ny/tAFVDir2dy6w2t1BVeb+j1788MYBhO9VcygyyONGKckn8NwtnmsrP9r61CcwJLPA==
+  resolved "https://codeload.github.com/doublesymmetry/react-native-track-player/tar.gz/f6229d68c2cdb650b90c38fa47f7e40d0028dfee"
 
 react-native-video@^6.0.0-alpha.1:
   version "6.0.0-alpha.1"

@@ -66,6 +66,9 @@
 // Includes from react-native-sensitive-info
 #include <winrt/RNSensitiveInfoCPP.h>
 
+// Includes from react-native-track-player
+#include <winrt/RNTrackPlayer.h>
+
 // Includes from react-native-video
 #include <winrt/ReactNativeVideoCPP.h>
 
@@ -119,6 +122,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::RNScreens::ReactPackageProvider());
     // IReactPackageProviders from react-native-sensitive-info
     packageProviders.Append(winrt::RNSensitiveInfoCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-track-player
+    packageProviders.Append(winrt::RNTrackPlayer::ReactPackageProvider());
     // IReactPackageProviders from react-native-video
     packageProviders.Append(winrt::ReactNativeVideoCPP::ReactPackageProvider());
     // IReactPackageProviders from react-native-webview

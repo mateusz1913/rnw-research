@@ -84,6 +84,29 @@ export const HomeScreen: React.FC = () => {
         title="SensitiveInfo">
         Use react-native-sensitive-info to store credentials in secure way
       </Section>
+      <Section
+        onPress={navigateTo(ROUTES.TRACK_PLAYER_AUDIO)}
+        title="TrackPlayerAudio">
+        Listen to tracks queue with react-native-track-player
+      </Section>
+      <Section onPress={navigateTo(ROUTES.PRINT)} title="Print">
+        Check how to print content with react-native-print
+      </Section>
+      <Section onPress={navigateTo(ROUTES.PERMISSIONS)} title="Permissions">
+        Try requesting some permissions with react-native-permissions
+      </Section>
+      <Section onPress={navigateTo(ROUTES.CAMERA)} title="Camera">
+        Look how camera can be accessed in UWP app with react-native-camera
+      </Section>
+      <Section
+        onPress={navigateTo(ROUTES.LINEAR_GRADIENT)}
+        title="Linear Gradient">
+        See how linear gradients can be displayed with
+        react-native-linear-gradient
+      </Section>
+      <Section onPress={navigateTo(ROUTES.DEVICE_INFO)} title="Device Info">
+        Check device's info with react-native-device-info
+      </Section>
     </Page>
   );
 };

@@ -15,6 +15,20 @@ export type RootStackParamList = {
   [ROUTES.VIDEO_AUDIO]: undefined;
   [ROUTES.ASYNC_STORAGE]: undefined;
   [ROUTES.SENSITIVE_INFO]: undefined;
+  [ROUTES.TRACK_PLAYER_AUDIO]: undefined;
+  [ROUTES.PRINT]: undefined;
+  [ROUTES.PERMISSIONS]: undefined;
+  [ROUTES.CAMERA]: undefined;
+  [ROUTES.LINEAR_GRADIENT]: undefined;
+  [ROUTES.DEVICE_INFO]: undefined;
+  [ROUTES.SLIDER]: undefined;
+  [ROUTES.PROGRESS_VIEW]: undefined;
+  [ROUTES.NETINFO]: undefined;
+  [ROUTES.DATETIMEPICKER]: undefined;
+  [ROUTES.CONFIG]: undefined;
+  [ROUTES.CLIPBOARD]: undefined;
+  [ROUTES.EXPANDER]: undefined;
+  [ROUTES.BLOB_UTIL]: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;

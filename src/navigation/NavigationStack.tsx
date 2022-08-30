@@ -12,6 +12,12 @@ import { FlyoutScreen } from '../screens/FlyoutScreen';
 import { VideoAudioScreen } from '../screens/VideoAudioScreen';
 import { AsyncStorageScreen } from '../screens/AsyncStorageScreen';
 import { SensitiveInfoScreen } from '../screens/SensitiveInfoScreen';
+import { TrackPlayerAudioScreen } from '../screens/TrackPlayerAudioScreen';
+import { PrintScreen } from '../screens/PrintScreen';
+import { PermissionsScreen } from '../screens/PermissionsScreen';
+import { CameraScreen } from '../screens/CameraScreen';
+import { LinearGradientScreen } from '../screens/LinearGradientScreen';
+import { DeviceInfoScreen } from '../screens/DeviceInfoScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -45,6 +51,18 @@ export const NavigationStack: React.FC = () => {
         name={ROUTES.SENSITIVE_INFO}
         component={SensitiveInfoScreen}
       />
+      <Stack.Screen
+        name={ROUTES.TRACK_PLAYER_AUDIO}
+        component={TrackPlayerAudioScreen}
+      />
+      <Stack.Screen name={ROUTES.PRINT} component={PrintScreen} />
+      <Stack.Screen name={ROUTES.PERMISSIONS} component={PermissionsScreen} />
+      <Stack.Screen name={ROUTES.CAMERA} component={CameraScreen} />
+      <Stack.Screen
+        name={ROUTES.LINEAR_GRADIENT}
+        component={LinearGradientScreen}
+      />
+      <Stack.Screen name={ROUTES.DEVICE_INFO} component={DeviceInfoScreen} />
     </Stack.Navigator>
   );
 };
