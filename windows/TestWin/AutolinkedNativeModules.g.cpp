@@ -30,6 +30,9 @@
 // Includes from @react-native-picker/picker
 #include <winrt/ReactNativePicker.h>
 
+// Includes from @wwimmo/react-native-sketch-canvas
+#include <winrt/RNSketchCanvas.h>
+
 // Includes from react-native-blob-util
 #include <winrt/ReactNativeBlobUtil.h>
 
@@ -57,6 +60,9 @@
 // Includes from react-native-orientation-locker
 #include <winrt/OrientationWindows.h>
 
+// Includes from react-native-pdf
+#include <winrt/RCTPdf.h>
+
 // Includes from react-native-permissions
 #include <winrt/RNPermissions.h>
 
@@ -81,6 +87,9 @@
 // Includes from react-native-webview
 #include <winrt/ReactNativeWebView.h>
 
+// Includes from react-native-xaml
+#include <winrt/ReactNativeXaml.h>
+
 namespace winrt::Microsoft::ReactNative
 {
 
@@ -104,6 +113,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::SliderWindows::ReactPackageProvider());
     // IReactPackageProviders from @react-native-picker/picker
     packageProviders.Append(winrt::ReactNativePicker::ReactPackageProvider());
+    // IReactPackageProviders from @wwimmo/react-native-sketch-canvas
+    packageProviders.Append(winrt::RNSketchCanvas::ReactPackageProvider());
     // IReactPackageProviders from react-native-blob-util
     packageProviders.Append(winrt::ReactNativeBlobUtil::ReactPackageProvider());
     // IReactPackageProviders from react-native-camera
@@ -122,6 +133,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::RNLocalize::ReactPackageProvider());
     // IReactPackageProviders from react-native-orientation-locker
     packageProviders.Append(winrt::OrientationWindows::ReactPackageProvider());
+    // IReactPackageProviders from react-native-pdf
+    packageProviders.Append(winrt::RCTPdf::ReactPackageProvider());
     // IReactPackageProviders from react-native-permissions
     packageProviders.Append(winrt::RNPermissions::ReactPackageProvider());
     // IReactPackageProviders from react-native-print
@@ -138,6 +151,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::ReactNativeVideoCPP::ReactPackageProvider());
     // IReactPackageProviders from react-native-webview
     packageProviders.Append(winrt::ReactNativeWebView::ReactPackageProvider());
+    // IReactPackageProviders from react-native-xaml
+    packageProviders.Append(winrt::ReactNativeXaml::ReactPackageProvider());
 }
 
 }

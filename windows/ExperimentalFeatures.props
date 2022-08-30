@@ -33,7 +33,7 @@
     -->
     <UseExperimentalNuget>false</UseExperimentalNuget>
 
-    <WinUI2xVersion>2.6.0</WinUI2xVersion>
+    <WinUI2xVersion>2.8.0-prerelease.210927001</WinUI2xVersion>
   
   </PropertyGroup>
 

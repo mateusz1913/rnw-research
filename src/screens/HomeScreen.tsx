@@ -47,6 +47,7 @@ export const HomeScreen: React.FC = () => {
         typeof ROUTES.VIDEO_PLAYER
       >,
     ) => {
+      // @ts-ignore
       return () => navigation.navigate(route);
     },
     [navigation],
@@ -57,6 +58,9 @@ export const HomeScreen: React.FC = () => {
       <Section title="Step One">
         Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen
         and then come back to see your edits.
+      </Section>
+      <Section onPress={navigateTo(ROUTES.XAML)} title="XAML">
+        Check all XAML controls with react-native-xaml
       </Section>
       <Section onPress={navigateTo(ROUTES.LOCALIZE)} title="Localize">
         Check react-native-localize library
@@ -71,7 +75,10 @@ export const HomeScreen: React.FC = () => {
         Watch video presented with native component from react-native-video
       </Section>
       <Section onPress={navigateTo(ROUTES.FLYOUT)} title="Flyout">
-        Check Flyout examples (Modal specific components in RNW)
+        Check Flyout control examples (Modal specific components in RNW)
+      </Section>
+      <Section onPress={navigateTo(ROUTES.POPUP)} title="Popup">
+        Check Popup examples
       </Section>
       <Section onPress={navigateTo(ROUTES.VIDEO_AUDIO)} title="AudioVideo">
         Listen audio with native component from react-native-video
@@ -142,6 +149,12 @@ export const HomeScreen: React.FC = () => {
         onPress={navigateTo(ROUTES.TEXT_TO_SPEECH)}
         title="Text-to-speech">
         Try text-to-speech with react-native-tts
+      </Section>
+      <Section onPress={navigateTo(ROUTES.SKETCH_CANVAS)} title="Sketch Canvas">
+        Try canvas sketch with @wwimmo/react-native-sketch-canvas
+      </Section>
+      <Section onPress={navigateTo(ROUTES.PDF)} title="Pdf">
+        Check Pdf view control with react-native-pdf
       </Section>
     </Page>
   );

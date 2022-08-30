@@ -12,6 +12,7 @@ export type RootStackParamList = {
     hasBuiltInControls: boolean;
   };
   [ROUTES.FLYOUT]: undefined;
+  [ROUTES.POPUP]: undefined;
   [ROUTES.VIDEO_AUDIO]: undefined;
   [ROUTES.ASYNC_STORAGE]: undefined;
   [ROUTES.SENSITIVE_INFO]: undefined;
@@ -31,6 +32,9 @@ export type RootStackParamList = {
   [ROUTES.BLOB_UTIL]: undefined;
   [ROUTES.FS]: undefined;
   [ROUTES.TEXT_TO_SPEECH]: undefined;
+  [ROUTES.XAML]: undefined;
+  [ROUTES.SKETCH_CANVAS]: undefined;
+  [ROUTES.PDF]: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;

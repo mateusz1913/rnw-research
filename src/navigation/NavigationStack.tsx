@@ -28,6 +28,10 @@ import { ExpanderScreen } from '../screens/ExpanderScreen';
 import { ConfigScreen } from '../screens/ConfigScreen';
 import { FSScreen } from '../screens/FSScreen';
 import { TextToSpeechScreen } from '../screens/TextToSpeechScreen';
+import { PopupScreen } from '../screens/PopupScreen';
+import { XamlScreen } from '../screens/XamlScreen';
+import { SketchCanvasScreen } from '../screens/SketchCanvasScreen';
+import { PdfScreen } from '../screens/PdfScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -52,6 +56,7 @@ export const NavigationStack: React.FC = () => {
         })}
       />
       <Stack.Screen name={ROUTES.FLYOUT} component={FlyoutScreen} />
+      <Stack.Screen name={ROUTES.POPUP} component={PopupScreen} />
       <Stack.Screen name={ROUTES.VIDEO_AUDIO} component={VideoAudioScreen} />
       <Stack.Screen
         name={ROUTES.ASYNC_STORAGE}
@@ -92,6 +97,12 @@ export const NavigationStack: React.FC = () => {
         name={ROUTES.TEXT_TO_SPEECH}
         component={TextToSpeechScreen}
       />
+      <Stack.Screen name={ROUTES.XAML} component={XamlScreen} />
+      <Stack.Screen
+        name={ROUTES.SKETCH_CANVAS}
+        component={SketchCanvasScreen}
+      />
+      <Stack.Screen name={ROUTES.PDF} component={PdfScreen} />
     </Stack.Navigator>
   );
 };

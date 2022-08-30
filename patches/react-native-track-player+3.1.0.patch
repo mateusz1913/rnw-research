@@ -1,0 +1,1357 @@
+diff --git a/node_modules/react-native-track-player/lib/hooks.d.ts b/node_modules/react-native-track-player/lib/hooks.d.ts
+new file mode 100644
+index 0000000..49c7778
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/hooks.d.ts
+@@ -0,0 +1,14 @@
++import { Event, EventsPayloadByEvent, Progress, State } from './interfaces';
++/** Get current playback state and subsequent updates  */
++export declare const usePlaybackState: () => State;
++/**
++ * Attaches a handler to the given TrackPlayer events and performs cleanup on unmount
++ * @param events - TrackPlayer events to subscribe to
++ * @param handler - callback invoked when the event fires
++ */
++export declare const useTrackPlayerEvents: <T extends Event[], H extends (data: EventsPayloadByEvent[T[number]]) => void>(events: T, handler: H) => void;
++/**
++ * Poll for track progress for the given interval (in miliseconds)
++ * @param interval - ms interval
++ */
++export declare function useProgress(updateInterval?: number): Progress;
+diff --git a/node_modules/react-native-track-player/lib/hooks.js b/node_modules/react-native-track-player/lib/hooks.js
+new file mode 100644
+index 0000000..e326795
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/hooks.js
+@@ -0,0 +1,193 @@
++"use strict";
++var __assign = (this && this.__assign) || function () {
++    __assign = Object.assign || function(t) {
++        for (var s, i = 1, n = arguments.length; i < n; i++) {
++            s = arguments[i];
++            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
++                t[p] = s[p];
++        }
++        return t;
++    };
++    return __assign.apply(this, arguments);
++};
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [op[0] & 2, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.useProgress = exports.useTrackPlayerEvents = exports.usePlaybackState = void 0;
++var react_1 = require("react");
++var interfaces_1 = require("./interfaces");
++var trackPlayer_1 = require("./trackPlayer");
++/** Get current playback state and subsequent updates  */
++var usePlaybackState = function () {
++    var _a = (0, react_1.useState)(interfaces_1.State.None), state = _a[0], setState = _a[1];
++    var isUnmountedRef = (0, react_1.useRef)(true);
++    (0, react_1.useEffect)(function () {
++        isUnmountedRef.current = false;
++        return function () {
++            isUnmountedRef.current = true;
++        };
++    }, []);
++    (0, react_1.useEffect)(function () {
++        function setPlayerState() {
++            return __awaiter(this, void 0, void 0, function () {
++                var playerState, _a;
++                return __generator(this, function (_b) {
++                    switch (_b.label) {
++                        case 0:
++                            _b.trys.push([0, 2, , 3]);
++                            return [4 /*yield*/, trackPlayer_1.default.getState()
++                                // If the component has been unmounted, exit
++                            ];
++                        case 1:
++                            playerState = _b.sent();
++                            // If the component has been unmounted, exit
++                            if (isUnmountedRef.current)
++                                return [2 /*return*/];
++                            setState(playerState);
++                            return [3 /*break*/, 3];
++                        case 2:
++                            _a = _b.sent();
++                            return [3 /*break*/, 3];
++                        case 3: return [2 /*return*/];
++                    }
++                });
++            });
++        }
++        // Set initial state
++        setPlayerState();
++        var sub = trackPlayer_1.default.addEventListener(interfaces_1.Event.PlaybackState, function (data) {
++            setState(data.state);
++        });
++        return function () { return sub.remove(); };
++    }, []);
++    return state;
++};
++exports.usePlaybackState = usePlaybackState;
++/**
++ * Attaches a handler to the given TrackPlayer events and performs cleanup on unmount
++ * @param events - TrackPlayer events to subscribe to
++ * @param handler - callback invoked when the event fires
++ */
++var useTrackPlayerEvents = function (events, handler) {
++    var savedHandler = (0, react_1.useRef)(handler);
++    savedHandler.current = handler;
++    /* eslint-disable react-hooks/exhaustive-deps */
++    (0, react_1.useEffect)(function () {
++        if (__DEV__) {
++            var allowedTypes_1 = Object.values(interfaces_1.Event);
++            var invalidTypes = events.filter(function (type) { return !allowedTypes_1.includes(type); });
++            if (invalidTypes.length) {
++                console.warn('One or more of the events provided to useTrackPlayerEvents is ' +
++                    "not a valid TrackPlayer event: ".concat(invalidTypes.join("', '"), ". ") +
++                    'A list of available events can be found at ' +
++                    'https://react-native-track-player.js.org/docs/api/events');
++            }
++        }
++        var subs = events.map(function (type) {
++            return trackPlayer_1.default.addEventListener(type, function (payload) {
++                // @ts-expect-error
++                savedHandler.current(__assign(__assign({}, payload), { type: type }));
++            });
++        });
++        return function () { return subs.forEach(function (sub) { return sub.remove(); }); };
++    }, events);
++};
++exports.useTrackPlayerEvents = useTrackPlayerEvents;
++/**
++ * Poll for track progress for the given interval (in miliseconds)
++ * @param interval - ms interval
++ */
++function useProgress(updateInterval) {
++    var _this = this;
++    var _a = (0, react_1.useState)({ position: 0, duration: 0, buffered: 0 }), state = _a[0], setState = _a[1];
++    var playerState = (0, exports.usePlaybackState)();
++    var stateRef = (0, react_1.useRef)(state);
++    var isUnmountedRef = (0, react_1.useRef)(true);
++    (0, react_1.useEffect)(function () {
++        isUnmountedRef.current = false;
++        return function () {
++            isUnmountedRef.current = true;
++        };
++    }, []);
++    var getProgress = function () { return __awaiter(_this, void 0, void 0, function () {
++        var _a, position, duration, buffered, state_1, _b;
++        return __generator(this, function (_c) {
++            switch (_c.label) {
++                case 0:
++                    _c.trys.push([0, 2, , 3]);
++                    return [4 /*yield*/, Promise.all([
++                            trackPlayer_1.default.getPosition(),
++                            trackPlayer_1.default.getDuration(),
++                            trackPlayer_1.default.getBufferedPosition(),
++                        ])
++                        // If the component has been unmounted, exit
++                    ];
++                case 1:
++                    _a = _c.sent(), position = _a[0], duration = _a[1], buffered = _a[2];
++                    // If the component has been unmounted, exit
++                    if (isUnmountedRef.current)
++                        return [2 /*return*/];
++                    // If there is no change in properties, exit
++                    if (position === stateRef.current.position &&
++                        duration === stateRef.current.duration &&
++                        buffered === stateRef.current.buffered)
++                        return [2 /*return*/];
++                    state_1 = { position: position, duration: duration, buffered: buffered };
++                    stateRef.current = state_1;
++                    setState(state_1);
++                    return [3 /*break*/, 3];
++                case 2:
++                    _b = _c.sent();
++                    return [3 /*break*/, 3];
++                case 3: return [2 /*return*/];
++            }
++        });
++    }); };
++    (0, react_1.useEffect)(function () {
++        if (playerState === interfaces_1.State.None) {
++            setState({ position: 0, duration: 0, buffered: 0 });
++            return;
++        }
++        // Set initial state
++        getProgress();
++        // Create interval to update state periodically
++        var poll = setInterval(getProgress, updateInterval || 1000);
++        return function () { return clearInterval(poll); };
++    }, [playerState, updateInterval]);
++    return state;
++}
++exports.useProgress = useProgress;
+diff --git a/node_modules/react-native-track-player/lib/index.d.ts b/node_modules/react-native-track-player/lib/index.d.ts
+new file mode 100644
+index 0000000..bcf2aa5
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/index.d.ts
+@@ -0,0 +1,4 @@
++import TrackPlayer from './trackPlayer';
++export * from './hooks';
++export * from './interfaces';
++export default TrackPlayer;
+diff --git a/node_modules/react-native-track-player/lib/index.js b/node_modules/react-native-track-player/lib/index.js
+new file mode 100644
+index 0000000..cb42364
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/index.js
+@@ -0,0 +1,20 @@
++"use strict";
++var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
++    if (k2 === undefined) k2 = k;
++    var desc = Object.getOwnPropertyDescriptor(m, k);
++    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
++      desc = { enumerable: true, get: function() { return m[k]; } };
++    }
++    Object.defineProperty(o, k2, desc);
++}) : (function(o, m, k, k2) {
++    if (k2 === undefined) k2 = k;
++    o[k2] = m[k];
++}));
++var __exportStar = (this && this.__exportStar) || function(m, exports) {
++    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var trackPlayer_1 = require("./trackPlayer");
++__exportStar(require("./hooks"), exports);
++__exportStar(require("./interfaces"), exports);
++exports.default = trackPlayer_1.default;
+diff --git a/node_modules/react-native-track-player/lib/interfaces.d.ts b/node_modules/react-native-track-player/lib/interfaces.d.ts
+new file mode 100644
+index 0000000..d2177e5
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/interfaces.d.ts
+@@ -0,0 +1,361 @@
++export declare enum IOSCategory {
++    Playback = "playback",
++    PlayAndRecord = "playAndRecord",
++    MultiRoute = "multiRoute",
++    Ambient = "ambient",
++    SoloAmbient = "soloAmbient",
++    Record = "record"
++}
++export declare enum IOSCategoryMode {
++    Default = "default",
++    GameChat = "gameChat",
++    Measurement = "measurement",
++    MoviePlayback = "moviePlayback",
++    SpokenAudio = "spokenAudio",
++    VideoChat = "videoChat",
++    VideoRecording = "videoRecording",
++    VoiceChat = "voiceChat",
++    VoicePrompt = "voicePrompt"
++}
++export declare enum IOSCategoryOptions {
++    MixWithOthers = "mixWithOthers",
++    DuckOthers = "duckOthers",
++    InterruptSpokenAudioAndMixWithOthers = "interruptSpokenAudioAndMixWithOthers",
++    AllowBluetooth = "allowBluetooth",
++    AllowBluetoothA2DP = "allowBluetoothA2DP",
++    AllowAirPlay = "allowAirPlay",
++    DefaultToSpeaker = "defaultToSpeaker"
++}
++export interface PlayerOptions {
++    /**
++     * Minimum time in seconds that needs to be buffered.
++     */
++    minBuffer?: number;
++    /**
++     * Maximum time in seconds that needs to be buffered
++     */
++    maxBuffer?: number;
++    /**
++     * Time in seconds that should be kept in the buffer behind the current playhead time.
++     */
++    backBuffer?: number;
++    /**
++     * Minimum time in seconds that needs to be buffered to start playing.
++     */
++    playBuffer?: number;
++    /**
++     * Maximum cache size in kilobytes.
++     */
++    maxCacheSize?: number;
++    /**
++     * [AVAudioSession.Category](https://developer.apple.com/documentation/avfoundation/avaudiosession/1616615-category) for iOS.
++     * Sets on `play()`.
++     */
++    iosCategory?: IOSCategory;
++    /**
++     * [AVAudioSession.Mode](https://developer.apple.com/documentation/avfoundation/avaudiosession/1616508-mode) for iOS.
++     * Sets on `play()`.
++     */
++    iosCategoryMode?: IOSCategoryMode;
++    /**
++     * [AVAudioSession.CategoryOptions](https://developer.apple.com/documentation/avfoundation/avaudiosession/1616503-categoryoptions) for iOS.
++     * Sets on `play()`.
++     */
++    iosCategoryOptions?: IOSCategoryOptions[];
++    /**
++     * Indicates whether the player should automatically delay playback in order to minimize stalling.
++     * Defaults to `false`.
++     */
++    waitForBuffer?: boolean;
++    /**
++     * Indicates whether the player should automatically update now playing metadata data in control center / notification.
++     * Defaults to `true`.
++     */
++    autoUpdateMetadata?: boolean;
++}
++export declare enum RatingType {
++    Heart,
++    ThumbsUpDown,
++    ThreeStars,
++    FourStars,
++    FiveStars,
++    Percentage
++}
++export interface FeedbackOptions {
++    /** Marks wether the option should be marked as active or "done" */
++    isActive: boolean;
++    /** The title to give the action (relevant for iOS) */
++    title: string;
++}
++export declare enum Capability {
++    Play,
++    PlayFromId,
++    PlayFromSearch,
++    Pause,
++    Stop,
++    SeekTo,
++    Skip,
++    SkipToNext,
++    SkipToPrevious,
++    JumpForward,
++    JumpBackward,
++    SetRating,
++    Like,
++    Dislike,
++    Bookmark
++}
++export declare type ResourceObject = number;
++export interface MetadataOptions {
++    ratingType?: RatingType;
++    forwardJumpInterval?: number;
++    backwardJumpInterval?: number;
++    progressUpdateEventInterval?: number;
++    likeOptions?: FeedbackOptions;
++    dislikeOptions?: FeedbackOptions;
++    bookmarkOptions?: FeedbackOptions;
++    capabilities?: Capability[];
++    stoppingAppPausesPlayback?: boolean;
++    alwaysPauseOnInterruption?: boolean;
++    notificationCapabilities?: Capability[];
++    compactCapabilities?: Capability[];
++    icon?: ResourceObject;
++    playIcon?: ResourceObject;
++    pauseIcon?: ResourceObject;
++    stopIcon?: ResourceObject;
++    previousIcon?: ResourceObject;
++    nextIcon?: ResourceObject;
++    rewindIcon?: ResourceObject;
++    forwardIcon?: ResourceObject;
++    color?: number;
++}
++export declare enum Event {
++    PlaybackState = "playback-state",
++    PlaybackError = "playback-error",
++    PlaybackQueueEnded = "playback-queue-ended",
++    PlaybackTrackChanged = "playback-track-changed",
++    PlaybackMetadataReceived = "playback-metadata-received",
++    PlaybackProgressUpdated = "playback-progress-updated",
++    RemotePlay = "remote-play",
++    RemotePlayId = "remote-play-id",
++    RemotePlaySearch = "remote-play-search",
++    RemotePause = "remote-pause",
++    RemoteStop = "remote-stop",
++    RemoteSkip = "remote-skip",
++    RemoteNext = "remote-next",
++    RemotePrevious = "remote-previous",
++    RemoteJumpForward = "remote-jump-forward",
++    RemoteJumpBackward = "remote-jump-backward",
++    RemoteSeek = "remote-seek",
++    RemoteSetRating = "remote-set-rating",
++    RemoteDuck = "remote-duck",
++    RemoteLike = "remote-like",
++    RemoteDislike = "remote-dislike",
++    RemoteBookmark = "remote-bookmark"
++}
++export declare enum TrackType {
++    Default = "default",
++    Dash = "dash",
++    HLS = "hls",
++    SmoothStreaming = "smoothstreaming"
++}
++export declare enum RepeatMode {
++    Off,
++    Track,
++    Queue
++}
++export declare enum PitchAlgorithm {
++    Linear,
++    Music,
++    Voice
++}
++export declare enum State {
++    None,
++    Ready,
++    Playing,
++    Paused,
++    Stopped,
++    Buffering,
++    Connecting
++}
++export interface TrackMetadataBase {
++    title?: string;
++    album?: string;
++    artist?: string;
++    duration?: number;
++    artwork?: string | ResourceObject;
++    description?: string;
++    genre?: string;
++    date?: string;
++    rating?: number | boolean;
++    isLiveStream?: boolean;
++}
++export interface NowPlayingMetadata extends TrackMetadataBase {
++    elapsedTime?: number;
++}
++export interface Track extends TrackMetadataBase {
++    url: string | ResourceObject;
++    type?: TrackType;
++    userAgent?: string;
++    contentType?: string;
++    pitchAlgorithm?: PitchAlgorithm;
++    headers?: {
++        [key: string]: any;
++    };
++    [key: string]: any;
++}
++export interface Progress {
++    position: number;
++    duration: number;
++    buffered: number;
++}
++export interface PlaybackProgressUpdatedEvent extends Progress {
++    track: number;
++}
++export interface PlaybackStateEvent {
++    state: State;
++}
++export interface PlaybackErrorEvent {
++    code: string;
++    message: string;
++}
++export interface PlaybackQueueEndedEvent {
++    track: number;
++    position: number;
++}
++export interface PlaybackTrackChangedEvent {
++    track: number;
++    position: number;
++    nextTrack: number;
++}
++export interface PlaybackMetadataReceivedEvent {
++    source: string;
++    title: string | null;
++    url: string | null;
++    artist: string | null;
++    album: string | null;
++    date: string | null;
++    genre: string | null;
++}
++export interface RemotePlayIdEvent {
++    id: string;
++}
++export interface RemotePlaySearchEvent {
++    query: string;
++    focus: string;
++    title: string;
++    artist: string;
++    album: string;
++    date: string;
++    playlist: string;
++}
++export interface RemoteSkipEvent {
++    index: number;
++}
++export interface RemoteJumpForwardEvent {
++    interval: number;
++}
++export interface RemoteJumpBackwardEvent {
++    interval: number;
++}
++export interface RemoteSeekEvent {
++    position: number;
++}
++export interface RemoteSetRatingEvent {
++    rating: boolean | number;
++}
++export interface RemoteDuckEvent {
++    paused: boolean;
++    permanent: boolean;
++}
++export interface EventPayloadByEvent {
++    [Event.PlaybackState]: PlaybackStateEvent;
++    [Event.PlaybackError]: PlaybackErrorEvent;
++    [Event.PlaybackQueueEnded]: PlaybackQueueEndedEvent;
++    [Event.PlaybackTrackChanged]: PlaybackTrackChangedEvent;
++    [Event.PlaybackMetadataReceived]: PlaybackMetadataReceivedEvent;
++    [Event.PlaybackProgressUpdated]: PlaybackProgressUpdatedEvent;
++    [Event.RemotePlay]: never;
++    [Event.RemotePlayId]: RemotePlayIdEvent;
++    [Event.RemotePlaySearch]: RemotePlaySearchEvent;
++    [Event.RemotePause]: never;
++    [Event.RemoteStop]: never;
++    [Event.RemoteSkip]: RemoteSkipEvent;
++    [Event.RemoteNext]: never;
++    [Event.RemotePrevious]: never;
++    [Event.RemoteJumpForward]: RemoteJumpForwardEvent;
++    [Event.RemoteJumpBackward]: RemoteJumpBackwardEvent;
++    [Event.RemoteSeek]: RemoteSeekEvent;
++    [Event.RemoteSetRating]: RemoteSetRatingEvent;
++    [Event.RemoteDuck]: RemoteDuckEvent;
++    [Event.RemoteLike]: never;
++    [Event.RemoteDislike]: never;
++    [Event.RemoteBookmark]: never;
++}
++export interface EventsPayloadByEvent {
++    [Event.PlaybackState]: PlaybackStateEvent & {
++        type: Event.PlaybackState;
++    };
++    [Event.PlaybackError]: PlaybackErrorEvent & {
++        type: Event.PlaybackError;
++    };
++    [Event.PlaybackQueueEnded]: PlaybackQueueEndedEvent & {
++        type: Event.PlaybackQueueEnded;
++    };
++    [Event.PlaybackTrackChanged]: PlaybackTrackChangedEvent & {
++        type: Event.PlaybackTrackChanged;
++    };
++    [Event.PlaybackMetadataReceived]: PlaybackMetadataReceivedEvent & {
++        type: Event.PlaybackMetadataReceived;
++    };
++    [Event.PlaybackProgressUpdated]: PlaybackProgressUpdatedEvent & {
++        type: Event.PlaybackProgressUpdated;
++    };
++    [Event.RemotePlay]: {
++        type: Event.RemotePlay;
++    };
++    [Event.RemotePlayId]: RemotePlayIdEvent & {
++        type: Event.RemotePlayId;
++    };
++    [Event.RemotePlaySearch]: RemotePlaySearchEvent & {
++        type: Event.RemotePlaySearch;
++    };
++    [Event.RemotePause]: {
++        type: Event.RemotePause;
++    };
++    [Event.RemoteStop]: {
++        type: Event.RemoteStop;
++    };
++    [Event.RemoteSkip]: RemoteSkipEvent & {
++        type: Event.RemoteSkip;
++    };
++    [Event.RemoteNext]: {
++        type: Event.RemoteNext;
++    };
++    [Event.RemotePrevious]: {
++        type: Event.RemotePrevious;
++    };
++    [Event.RemoteJumpForward]: RemoteJumpForwardEvent & {
++        type: Event.RemoteJumpForward;
++    };
++    [Event.RemoteJumpBackward]: RemoteJumpBackwardEvent & {
++        type: Event.RemoteJumpBackward;
++    };
++    [Event.RemoteSeek]: RemoteSeekEvent & {
++        type: Event.RemoteSeek;
++    };
++    [Event.RemoteSetRating]: RemoteSetRatingEvent & {
++        type: Event.RemoteSetRating;
++    };
++    [Event.RemoteDuck]: RemoteDuckEvent & {
++        type: Event.RemoteDuck;
++    };
++    [Event.RemoteLike]: {
++        type: Event.RemoteLike;
++    };
++    [Event.RemoteDislike]: {
++        type: Event.RemoteDislike;
++    };
++    [Event.RemoteBookmark]: {
++        type: Event.RemoteBookmark;
++    };
++}
+diff --git a/node_modules/react-native-track-player/lib/interfaces.js b/node_modules/react-native-track-player/lib/interfaces.js
+new file mode 100644
+index 0000000..9ad7c55
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/interfaces.js
+@@ -0,0 +1,117 @@
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.State = exports.PitchAlgorithm = exports.RepeatMode = exports.TrackType = exports.Event = exports.Capability = exports.RatingType = exports.IOSCategoryOptions = exports.IOSCategoryMode = exports.IOSCategory = void 0;
++var react_native_1 = require("react-native");
++var TrackPlayer = react_native_1.NativeModules.TrackPlayerModule;
++var IOSCategory;
++(function (IOSCategory) {
++    IOSCategory["Playback"] = "playback";
++    IOSCategory["PlayAndRecord"] = "playAndRecord";
++    IOSCategory["MultiRoute"] = "multiRoute";
++    IOSCategory["Ambient"] = "ambient";
++    IOSCategory["SoloAmbient"] = "soloAmbient";
++    IOSCategory["Record"] = "record";
++})(IOSCategory = exports.IOSCategory || (exports.IOSCategory = {}));
++var IOSCategoryMode;
++(function (IOSCategoryMode) {
++    IOSCategoryMode["Default"] = "default";
++    IOSCategoryMode["GameChat"] = "gameChat";
++    IOSCategoryMode["Measurement"] = "measurement";
++    IOSCategoryMode["MoviePlayback"] = "moviePlayback";
++    IOSCategoryMode["SpokenAudio"] = "spokenAudio";
++    IOSCategoryMode["VideoChat"] = "videoChat";
++    IOSCategoryMode["VideoRecording"] = "videoRecording";
++    IOSCategoryMode["VoiceChat"] = "voiceChat";
++    IOSCategoryMode["VoicePrompt"] = "voicePrompt";
++})(IOSCategoryMode = exports.IOSCategoryMode || (exports.IOSCategoryMode = {}));
++var IOSCategoryOptions;
++(function (IOSCategoryOptions) {
++    IOSCategoryOptions["MixWithOthers"] = "mixWithOthers";
++    IOSCategoryOptions["DuckOthers"] = "duckOthers";
++    IOSCategoryOptions["InterruptSpokenAudioAndMixWithOthers"] = "interruptSpokenAudioAndMixWithOthers";
++    IOSCategoryOptions["AllowBluetooth"] = "allowBluetooth";
++    IOSCategoryOptions["AllowBluetoothA2DP"] = "allowBluetoothA2DP";
++    IOSCategoryOptions["AllowAirPlay"] = "allowAirPlay";
++    IOSCategoryOptions["DefaultToSpeaker"] = "defaultToSpeaker";
++})(IOSCategoryOptions = exports.IOSCategoryOptions || (exports.IOSCategoryOptions = {}));
++var RatingType;
++(function (RatingType) {
++    RatingType[RatingType["Heart"] = TrackPlayer.RATING_HEART] = "Heart";
++    RatingType[RatingType["ThumbsUpDown"] = TrackPlayer.RATING_THUMBS_UP_DOWN] = "ThumbsUpDown";
++    RatingType[RatingType["ThreeStars"] = TrackPlayer.RATING_3_STARS] = "ThreeStars";
++    RatingType[RatingType["FourStars"] = TrackPlayer.RATING_4_STARS] = "FourStars";
++    RatingType[RatingType["FiveStars"] = TrackPlayer.RATING_5_STARS] = "FiveStars";
++    RatingType[RatingType["Percentage"] = TrackPlayer.RATING_PERCENTAGE] = "Percentage";
++})(RatingType = exports.RatingType || (exports.RatingType = {}));
++var Capability;
++(function (Capability) {
++    Capability[Capability["Play"] = TrackPlayer.CAPABILITY_PLAY] = "Play";
++    Capability[Capability["PlayFromId"] = TrackPlayer.CAPABILITY_PLAY_FROM_ID] = "PlayFromId";
++    Capability[Capability["PlayFromSearch"] = TrackPlayer.CAPABILITY_PLAY_FROM_SEARCH] = "PlayFromSearch";
++    Capability[Capability["Pause"] = TrackPlayer.CAPABILITY_PAUSE] = "Pause";
++    Capability[Capability["Stop"] = TrackPlayer.CAPABILITY_STOP] = "Stop";
++    Capability[Capability["SeekTo"] = TrackPlayer.CAPABILITY_SEEK_TO] = "SeekTo";
++    Capability[Capability["Skip"] = TrackPlayer.CAPABILITY_SKIP] = "Skip";
++    Capability[Capability["SkipToNext"] = TrackPlayer.CAPABILITY_SKIP_TO_NEXT] = "SkipToNext";
++    Capability[Capability["SkipToPrevious"] = TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS] = "SkipToPrevious";
++    Capability[Capability["JumpForward"] = TrackPlayer.CAPABILITY_JUMP_FORWARD] = "JumpForward";
++    Capability[Capability["JumpBackward"] = TrackPlayer.CAPABILITY_JUMP_BACKWARD] = "JumpBackward";
++    Capability[Capability["SetRating"] = TrackPlayer.CAPABILITY_SET_RATING] = "SetRating";
++    Capability[Capability["Like"] = TrackPlayer.CAPABILITY_LIKE] = "Like";
++    Capability[Capability["Dislike"] = TrackPlayer.CAPABILITY_DISLIKE] = "Dislike";
++    Capability[Capability["Bookmark"] = TrackPlayer.CAPABILITY_BOOKMARK] = "Bookmark";
++})(Capability = exports.Capability || (exports.Capability = {}));
++var Event;
++(function (Event) {
++    Event["PlaybackState"] = "playback-state";
++    Event["PlaybackError"] = "playback-error";
++    Event["PlaybackQueueEnded"] = "playback-queue-ended";
++    Event["PlaybackTrackChanged"] = "playback-track-changed";
++    Event["PlaybackMetadataReceived"] = "playback-metadata-received";
++    Event["PlaybackProgressUpdated"] = "playback-progress-updated";
++    Event["RemotePlay"] = "remote-play";
++    Event["RemotePlayId"] = "remote-play-id";
++    Event["RemotePlaySearch"] = "remote-play-search";
++    Event["RemotePause"] = "remote-pause";
++    Event["RemoteStop"] = "remote-stop";
++    Event["RemoteSkip"] = "remote-skip";
++    Event["RemoteNext"] = "remote-next";
++    Event["RemotePrevious"] = "remote-previous";
++    Event["RemoteJumpForward"] = "remote-jump-forward";
++    Event["RemoteJumpBackward"] = "remote-jump-backward";
++    Event["RemoteSeek"] = "remote-seek";
++    Event["RemoteSetRating"] = "remote-set-rating";
++    Event["RemoteDuck"] = "remote-duck";
++    Event["RemoteLike"] = "remote-like";
++    Event["RemoteDislike"] = "remote-dislike";
++    Event["RemoteBookmark"] = "remote-bookmark";
++})(Event = exports.Event || (exports.Event = {}));
++var TrackType;
++(function (TrackType) {
++    TrackType["Default"] = "default";
++    TrackType["Dash"] = "dash";
++    TrackType["HLS"] = "hls";
++    TrackType["SmoothStreaming"] = "smoothstreaming";
++})(TrackType = exports.TrackType || (exports.TrackType = {}));
++var RepeatMode;
++(function (RepeatMode) {
++    RepeatMode[RepeatMode["Off"] = TrackPlayer.REPEAT_OFF] = "Off";
++    RepeatMode[RepeatMode["Track"] = TrackPlayer.REPEAT_TRACK] = "Track";
++    RepeatMode[RepeatMode["Queue"] = TrackPlayer.REPEAT_QUEUE] = "Queue";
++})(RepeatMode = exports.RepeatMode || (exports.RepeatMode = {}));
++var PitchAlgorithm;
++(function (PitchAlgorithm) {
++    PitchAlgorithm[PitchAlgorithm["Linear"] = TrackPlayer.PITCH_ALGORITHM_LINEAR] = "Linear";
++    PitchAlgorithm[PitchAlgorithm["Music"] = TrackPlayer.PITCH_ALGORITHM_MUSIC] = "Music";
++    PitchAlgorithm[PitchAlgorithm["Voice"] = TrackPlayer.PITCH_ALGORITHM_VOICE] = "Voice";
++})(PitchAlgorithm = exports.PitchAlgorithm || (exports.PitchAlgorithm = {}));
++var State;
++(function (State) {
++    State[State["None"] = TrackPlayer.STATE_NONE] = "None";
++    State[State["Ready"] = TrackPlayer.STATE_READY] = "Ready";
++    State[State["Playing"] = TrackPlayer.STATE_PLAYING] = "Playing";
++    State[State["Paused"] = TrackPlayer.STATE_PAUSED] = "Paused";
++    State[State["Stopped"] = TrackPlayer.STATE_STOPPED] = "Stopped";
++    State[State["Buffering"] = TrackPlayer.STATE_BUFFERING] = "Buffering";
++    State[State["Connecting"] = TrackPlayer.STATE_CONNECTING] = "Connecting";
++})(State = exports.State || (exports.State = {}));
+diff --git a/node_modules/react-native-track-player/lib/trackPlayer.d.ts b/node_modules/react-native-track-player/lib/trackPlayer.d.ts
+new file mode 100644
+index 0000000..befb840
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/trackPlayer.d.ts
+@@ -0,0 +1,152 @@
++import { Event, EventPayloadByEvent, MetadataOptions, NowPlayingMetadata, PlayerOptions, RepeatMode, State, Track, TrackMetadataBase } from './interfaces';
++/**
++ * Initializes the player with the specified options.
++ */
++declare function setupPlayer(options?: PlayerOptions): Promise<void>;
++declare type ServiceHandler = () => Promise<void>;
++/**
++ * Register the playback service. The service will run as long as the player runs.
++ */
++declare function registerPlaybackService(factory: () => ServiceHandler): void;
++declare function addEventListener<T extends Event>(event: T, listener: EventPayloadByEvent[T] extends never ? () => void : (event: EventPayloadByEvent[T]) => void): import("react-native").EmitterSubscription;
++/**
++ * @deprecated This method should not be used, most methods reject when service is not bound.
++ */
++declare function isServiceRunning(): Promise<boolean>;
++/**
++ * Adds one or more tracks to the queue.
++ */
++declare function add(tracks: Track | Track[], insertBeforeIndex?: number): Promise<number | void>;
++/**
++ * Removes one or more tracks from the queue.
++ */
++declare function remove(tracks: number | number[]): Promise<void>;
++/**
++ * Clears any upcoming tracks from the queue.
++ */
++declare function removeUpcomingTracks(): Promise<void>;
++/**
++ * Skips to a track in the queue.
++ */
++declare function skip(trackIndex: number, initialPosition?: number): Promise<void>;
++/**
++ * Skips to the next track in the queue.
++ */
++declare function skipToNext(initialPosition?: number): Promise<void>;
++/**
++ * Skips to the previous track in the queue.
++ */
++declare function skipToPrevious(initialPosition?: number): Promise<void>;
++/**
++ * Updates the configuration for the components.
++ */
++declare function updateOptions(options?: MetadataOptions): Promise<void>;
++/**
++ * Updates the metadata of a track in the queue. If the current track is updated,
++ * the notification and the Now Playing Center will be updated accordingly.
++ */
++declare function updateMetadataForTrack(trackIndex: number, metadata: TrackMetadataBase): Promise<void>;
++declare function clearNowPlayingMetadata(): Promise<void>;
++declare function updateNowPlayingMetadata(metadata: NowPlayingMetadata): Promise<void>;
++/**
++ * Resets the player stopping the current track and clearing the queue.
++ */
++declare function reset(): Promise<void>;
++/**
++ * Plays or resumes the current track.
++ */
++declare function play(): Promise<void>;
++/**
++ * Pauses the current track.
++ */
++declare function pause(): Promise<void>;
++/**
++ * Seeks to a specified time position in the current track.
++ */
++declare function seekTo(position: number): Promise<void>;
++/**
++ * Sets the volume of the player.
++ */
++declare function setVolume(level: number): Promise<void>;
++/**
++ * Sets the playback rate.
++ */
++declare function setRate(rate: number): Promise<void>;
++/**
++ * Sets the repeat mode.
++ */
++declare function setRepeatMode(mode: RepeatMode): Promise<RepeatMode>;
++/**
++ * Gets the volume of the player (a number between 0 and 1).
++ */
++declare function getVolume(): Promise<number>;
++/**
++ * Gets the playback rate, where 1 is the regular speed.
++ */
++declare function getRate(): Promise<number>;
++/**
++ * Gets a track object from the queue.
++ */
++declare function getTrack(trackIndex: number): Promise<Track | null>;
++/**
++ * Gets the whole queue.
++ */
++declare function getQueue(): Promise<Track[]>;
++/**
++ * Gets the index of the current track.
++ */
++declare function getCurrentTrack(): Promise<number>;
++/**
++ * Gets the duration of the current track in seconds.
++ */
++declare function getDuration(): Promise<number>;
++/**
++ * Gets the buffered position of the player in seconds.
++ */
++declare function getBufferedPosition(): Promise<number>;
++/**
++ * Gets the position of the player in seconds.
++ */
++declare function getPosition(): Promise<number>;
++/**
++ * Gets the state of the player.
++ */
++declare function getState(): Promise<State>;
++/**
++ * Gets the repeat mode.
++ */
++declare function getRepeatMode(): Promise<RepeatMode>;
++declare const _default: {
++    setupPlayer: typeof setupPlayer;
++    registerPlaybackService: typeof registerPlaybackService;
++    addEventListener: typeof addEventListener;
++    isServiceRunning: typeof isServiceRunning;
++    add: typeof add;
++    remove: typeof remove;
++    removeUpcomingTracks: typeof removeUpcomingTracks;
++    skip: typeof skip;
++    skipToNext: typeof skipToNext;
++    skipToPrevious: typeof skipToPrevious;
++    updateOptions: typeof updateOptions;
++    updateMetadataForTrack: typeof updateMetadataForTrack;
++    clearNowPlayingMetadata: typeof clearNowPlayingMetadata;
++    updateNowPlayingMetadata: typeof updateNowPlayingMetadata;
++    reset: typeof reset;
++    play: typeof play;
++    pause: typeof pause;
++    seekTo: typeof seekTo;
++    setVolume: typeof setVolume;
++    setRate: typeof setRate;
++    setRepeatMode: typeof setRepeatMode;
++    getVolume: typeof getVolume;
++    getRate: typeof getRate;
++    getTrack: typeof getTrack;
++    getQueue: typeof getQueue;
++    getCurrentTrack: typeof getCurrentTrack;
++    getDuration: typeof getDuration;
++    getBufferedPosition: typeof getBufferedPosition;
++    getPosition: typeof getPosition;
++    getState: typeof getState;
++    getRepeatMode: typeof getRepeatMode;
++};
++export default _default;
+diff --git a/node_modules/react-native-track-player/lib/trackPlayer.js b/node_modules/react-native-track-player/lib/trackPlayer.js
+new file mode 100644
+index 0000000..e3573b4
+--- /dev/null
++++ b/node_modules/react-native-track-player/lib/trackPlayer.js
+@@ -0,0 +1,448 @@
++"use strict";
++var __assign = (this && this.__assign) || function () {
++    __assign = Object.assign || function(t) {
++        for (var s, i = 1, n = arguments.length; i < n; i++) {
++            s = arguments[i];
++            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
++                t[p] = s[p];
++        }
++        return t;
++    };
++    return __assign.apply(this, arguments);
++};
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [op[0] & 2, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
++    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
++        if (ar || !(i in from)) {
++            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
++            ar[i] = from[i];
++        }
++    }
++    return to.concat(ar || Array.prototype.slice.call(from));
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var react_native_1 = require("react-native");
++// @ts-ignore
++var resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
++var TrackPlayer = react_native_1.NativeModules.TrackPlayerModule;
++var emitter = react_native_1.Platform.OS !== 'android' ? new react_native_1.NativeEventEmitter(TrackPlayer) : react_native_1.DeviceEventEmitter;
++// MARK: - Helpers
++function resolveImportedPath(path) {
++    if (!path)
++        return undefined;
++    return resolveAssetSource(path) || path;
++}
++// RN doesn't allow nullable NSNumbers so convert optional number parameters
++// to a conventional default.
++function optionalNumberToDefault(num, defaultValue) {
++    if (defaultValue === void 0) { defaultValue = -1; }
++    return num === undefined ? defaultValue : num;
++}
++// MARK: - General API
++/**
++ * Initializes the player with the specified options.
++ */
++function setupPlayer(options) {
++    if (options === void 0) { options = {}; }
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.setupPlayer(options || {})];
++        });
++    });
++}
++/**
++ * Register the playback service. The service will run as long as the player runs.
++ */
++function registerPlaybackService(factory) {
++    if (react_native_1.Platform.OS === 'android') {
++        // Registers the headless task
++        react_native_1.AppRegistry.registerHeadlessTask('TrackPlayer', factory);
++    }
++    else {
++        // Initializes and runs the service in the next tick
++        setImmediate(factory());
++    }
++}
++function addEventListener(event, listener) {
++    return emitter.addListener(event, listener);
++}
++/**
++ * @deprecated This method should not be used, most methods reject when service is not bound.
++ */
++function isServiceRunning() {
++    return TrackPlayer.isServiceRunning();
++}
++// MARK: - Queue API
++/**
++ * Adds one or more tracks to the queue.
++ */
++function add(tracks, insertBeforeIndex) {
++    return __awaiter(this, void 0, void 0, function () {
++        var i;
++        return __generator(this, function (_a) {
++            // Clone the array before modifying it
++            if (Array.isArray(tracks)) {
++                tracks = __spreadArray([], tracks, true);
++            }
++            else {
++                tracks = [tracks];
++            }
++            if (tracks.length < 1)
++                return [2 /*return*/];
++            for (i = 0; i < tracks.length; i++) {
++                // Clone the object before modifying it
++                tracks[i] = __assign({}, tracks[i]);
++                // Resolve the URLs
++                tracks[i].url = resolveImportedPath(tracks[i].url);
++                tracks[i].artwork = resolveImportedPath(tracks[i].artwork);
++            }
++            // Note: we must be careful about passing nulls to non nullable parameters on Android.
++            return [2 /*return*/, TrackPlayer.add(tracks, optionalNumberToDefault(insertBeforeIndex))];
++        });
++    });
++}
++/**
++ * Removes one or more tracks from the queue.
++ */
++function remove(tracks) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            if (!Array.isArray(tracks)) {
++                tracks = [tracks];
++            }
++            return [2 /*return*/, TrackPlayer.remove(tracks)];
++        });
++    });
++}
++/**
++ * Clears any upcoming tracks from the queue.
++ */
++function removeUpcomingTracks() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.removeUpcomingTracks()];
++        });
++    });
++}
++/**
++ * Skips to a track in the queue.
++ */
++function skip(trackIndex, initialPosition) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.skip(trackIndex, optionalNumberToDefault(initialPosition))];
++        });
++    });
++}
++/**
++ * Skips to the next track in the queue.
++ */
++function skipToNext(initialPosition) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.skipToNext(optionalNumberToDefault(initialPosition))];
++        });
++    });
++}
++/**
++ * Skips to the previous track in the queue.
++ */
++function skipToPrevious(initialPosition) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.skipToPrevious(optionalNumberToDefault(initialPosition))];
++        });
++    });
++}
++// MARK: - Control Center / Notifications API
++/**
++ * Updates the configuration for the components.
++ */
++function updateOptions(options) {
++    if (options === void 0) { options = {}; }
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            options = __assign({}, options);
++            // Resolve the asset for each icon
++            options.icon = resolveImportedPath(options.icon);
++            options.playIcon = resolveImportedPath(options.playIcon);
++            options.pauseIcon = resolveImportedPath(options.pauseIcon);
++            options.stopIcon = resolveImportedPath(options.stopIcon);
++            options.previousIcon = resolveImportedPath(options.previousIcon);
++            options.nextIcon = resolveImportedPath(options.nextIcon);
++            options.rewindIcon = resolveImportedPath(options.rewindIcon);
++            options.forwardIcon = resolveImportedPath(options.forwardIcon);
++            return [2 /*return*/, TrackPlayer.updateOptions(options)];
++        });
++    });
++}
++/**
++ * Updates the metadata of a track in the queue. If the current track is updated,
++ * the notification and the Now Playing Center will be updated accordingly.
++ */
++function updateMetadataForTrack(trackIndex, metadata) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            // Clone the object before modifying it
++            metadata = Object.assign({}, metadata);
++            // Resolve the artwork URL
++            metadata.artwork = resolveImportedPath(metadata.artwork);
++            return [2 /*return*/, TrackPlayer.updateMetadataForTrack(trackIndex, metadata)];
++        });
++    });
++}
++function clearNowPlayingMetadata() {
++    return TrackPlayer.clearNowPlayingMetadata();
++}
++function updateNowPlayingMetadata(metadata) {
++    // Clone the object before modifying it
++    metadata = Object.assign({}, metadata);
++    // Resolve the artwork URL
++    metadata.artwork = resolveImportedPath(metadata.artwork);
++    return TrackPlayer.updateNowPlayingMetadata(metadata);
++}
++// MARK: - Player API
++/**
++ * Resets the player stopping the current track and clearing the queue.
++ */
++function reset() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.reset()];
++        });
++    });
++}
++/**
++ * Plays or resumes the current track.
++ */
++function play() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.play()];
++        });
++    });
++}
++/**
++ * Pauses the current track.
++ */
++function pause() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.pause()];
++        });
++    });
++}
++/**
++ * Seeks to a specified time position in the current track.
++ */
++function seekTo(position) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.seekTo(position)];
++        });
++    });
++}
++/**
++ * Sets the volume of the player.
++ */
++function setVolume(level) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.setVolume(level)];
++        });
++    });
++}
++/**
++ * Sets the playback rate.
++ */
++function setRate(rate) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.setRate(rate)];
++        });
++    });
++}
++/**
++ * Sets the repeat mode.
++ */
++function setRepeatMode(mode) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.setRepeatMode(mode)];
++        });
++    });
++}
++// MARK: - Getters
++/**
++ * Gets the volume of the player (a number between 0 and 1).
++ */
++function getVolume() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getVolume()];
++        });
++    });
++}
++/**
++ * Gets the playback rate, where 1 is the regular speed.
++ */
++function getRate() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getRate()];
++        });
++    });
++}
++/**
++ * Gets a track object from the queue.
++ */
++function getTrack(trackIndex) {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getTrack(trackIndex)];
++        });
++    });
++}
++/**
++ * Gets the whole queue.
++ */
++function getQueue() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getQueue()];
++        });
++    });
++}
++/**
++ * Gets the index of the current track.
++ */
++function getCurrentTrack() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getCurrentTrack()];
++        });
++    });
++}
++/**
++ * Gets the duration of the current track in seconds.
++ */
++function getDuration() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getDuration()];
++        });
++    });
++}
++/**
++ * Gets the buffered position of the player in seconds.
++ */
++function getBufferedPosition() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getBufferedPosition()];
++        });
++    });
++}
++/**
++ * Gets the position of the player in seconds.
++ */
++function getPosition() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getPosition()];
++        });
++    });
++}
++/**
++ * Gets the state of the player.
++ */
++function getState() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getState()];
++        });
++    });
++}
++/**
++ * Gets the repeat mode.
++ */
++function getRepeatMode() {
++    return __awaiter(this, void 0, void 0, function () {
++        return __generator(this, function (_a) {
++            return [2 /*return*/, TrackPlayer.getRepeatMode()];
++        });
++    });
++}
++exports.default = {
++    // MARK: - General API
++    setupPlayer: setupPlayer,
++    registerPlaybackService: registerPlaybackService,
++    addEventListener: addEventListener,
++    isServiceRunning: isServiceRunning,
++    // MARK: - Queue API
++    add: add,
++    remove: remove,
++    removeUpcomingTracks: removeUpcomingTracks,
++    skip: skip,
++    skipToNext: skipToNext,
++    skipToPrevious: skipToPrevious,
++    // MARK: - Control Center / Notifications API
++    updateOptions: updateOptions,
++    updateMetadataForTrack: updateMetadataForTrack,
++    clearNowPlayingMetadata: clearNowPlayingMetadata,
++    updateNowPlayingMetadata: updateNowPlayingMetadata,
++    // MARK: - Player API
++    reset: reset,
++    play: play,
++    pause: pause,
++    seekTo: seekTo,
++    setVolume: setVolume,
++    setRate: setRate,
++    setRepeatMode: setRepeatMode,
++    // MARK: - Getters
++    getVolume: getVolume,
++    getRate: getRate,
++    getTrack: getTrack,
++    getQueue: getQueue,
++    getCurrentTrack: getCurrentTrack,
++    getDuration: getDuration,
++    getBufferedPosition: getBufferedPosition,
++    getPosition: getPosition,
++    getState: getState,
++    getRepeatMode: getRepeatMode,
++};

@@ -6,6 +6,7 @@ export const ROUTES = Object.freeze({
   VIDEO: 'VIDEO',
   VIDEO_PLAYER: 'VIDEO_PLAYER',
   FLYOUT: 'FLYOUT',
+  POPUP: 'POPUP',
   VIDEO_AUDIO: 'VIDEO_AUDIO',
   ASYNC_STORAGE: 'ASYNC_STORAGE',
   SENSITIVE_INFO: 'SENSITIVE_INFO',
@@ -22,12 +23,13 @@ export const ROUTES = Object.freeze({
   CONFIG: 'CONFIG',
   FS: 'FS', // CPP impl is not merged
   TEXT_TO_SPEECH: 'TEXT_TO_SPEECH', // CPP, but package is old
+  SKETCH_CANVAS: 'SKETCH_CANVAS',
+  XAML: 'XAML', // Needs (probably) experimental version of WinUI; There were some issues with mismatched CppWinRT nuget versions
+  PDF: 'PDF', // https://github.com/wonday/react-native-pdf/issues/683
   // DO NOT WORK
   CLIPBOARD: 'CLIPBOARD',
   TRACK_PLAYER_AUDIO: 'TRACK_PLAYER_AUDIO', // NPM package has not exported windows code + windows code is not actively maintained
   PRINT: 'PRINT',
-  // XAML: 'XAML', // Needs experimental version of WinUI
-  // PDF: 'PDF', // ???
   // DOCUMENT_PICKER: 'DOCUMENT_PICKER', // CSharp
   // SQLITE_STORAGE: 'SQLITE_STORAGE', // CPP, but package is old
   // FILE_VIEWER: 'FILE_VIEWER', // CSharp
