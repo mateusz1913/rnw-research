@@ -107,6 +107,42 @@ export const HomeScreen: React.FC = () => {
       <Section onPress={navigateTo(ROUTES.DEVICE_INFO)} title="Device Info">
         Check device's info with react-native-device-info
       </Section>
+      <Section onPress={navigateTo(ROUTES.BLOB_UTIL)} title="Blob util">
+        Try file system with react-native-blob-util
+      </Section>
+      <Section onPress={navigateTo(ROUTES.SLIDER)} title="Slider">
+        Use slider component from @react-native-community/slider
+      </Section>
+      <Section onPress={navigateTo(ROUTES.PROGRESS_VIEW)} title="Progress view">
+        Use progress view component from
+        @react-native-progress-view/progress-view
+      </Section>
+      <Section onPress={navigateTo(ROUTES.NETINFO)} title="NetInfo">
+        Check internet connection details with @react-native-community/netinfo
+      </Section>
+      <Section
+        onPress={navigateTo(ROUTES.DATETIMEPICKER)}
+        title="DateTimePicker">
+        Use date and time picker controls from
+        @react-native-community/datetimepicker
+      </Section>
+      <Section onPress={navigateTo(ROUTES.CLIPBOARD)} title="Clipboard">
+        Access native clipboard with @react-native-clipboard/clipboard
+      </Section>
+      <Section onPress={navigateTo(ROUTES.EXPANDER)} title="Expander">
+        Check expander control from @fluentui-react-native/experimental-expander
+      </Section>
+      <Section onPress={navigateTo(ROUTES.CONFIG)} title="Config">
+        Use environment values with react-native-config
+      </Section>
+      <Section onPress={navigateTo(ROUTES.FS)} title="FS">
+        Try file system with react-native-fs
+      </Section>
+      <Section
+        onPress={navigateTo(ROUTES.TEXT_TO_SPEECH)}
+        title="Text-to-speech">
+        Try text-to-speech with react-native-tts
+      </Section>
     </Page>
   );
 };

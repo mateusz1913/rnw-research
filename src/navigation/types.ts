@@ -29,6 +29,8 @@ export type RootStackParamList = {
   [ROUTES.CLIPBOARD]: undefined;
   [ROUTES.EXPANDER]: undefined;
   [ROUTES.BLOB_UTIL]: undefined;
+  [ROUTES.FS]: undefined;
+  [ROUTES.TEXT_TO_SPEECH]: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;

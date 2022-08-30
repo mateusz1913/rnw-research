@@ -18,18 +18,18 @@ export const ROUTES = Object.freeze({
   PROGRESS_VIEW: 'PROGRESS_VIEW',
   NETINFO: 'NETINFO',
   DATETIMEPICKER: 'DATETIMEPICKER',
-  CLIPBOARD: 'CLIPBOARD',
   EXPANDER: 'EXPANDER',
   CONFIG: 'CONFIG',
+  FS: 'FS', // CPP impl is not merged
+  TEXT_TO_SPEECH: 'TEXT_TO_SPEECH', // CPP, but package is old
   // DO NOT WORK
-  TRACK_PLAYER_AUDIO: 'TRACK_PLAYER_AUDIO',
+  CLIPBOARD: 'CLIPBOARD',
+  TRACK_PLAYER_AUDIO: 'TRACK_PLAYER_AUDIO', // NPM package has not exported windows code + windows code is not actively maintained
   PRINT: 'PRINT',
-  // XAML: 'XAML',
-  // PDF: 'PDF',
+  // XAML: 'XAML', // Needs experimental version of WinUI
+  // PDF: 'PDF', // ???
   // DOCUMENT_PICKER: 'DOCUMENT_PICKER', // CSharp
   // SQLITE_STORAGE: 'SQLITE_STORAGE', // CPP, but package is old
-  // FILE_VIEWER: 'FILE_VIEWER',
-  // TEXT_TO_SPEECH: 'TEXT_TO_SPEECH', // CPP, but package is old
-  // FS: 'FS', // CPP impl is not merged
-  // GESTURE_HANDLER: 'GESTURE_HANDLER', // CPP impl is not merged
+  // FILE_VIEWER: 'FILE_VIEWER', // CSharp
+  // GESTURE_HANDLER: 'GESTURE_HANDLER', // CPP impl is not merged; Does not work (compilation error)
 });

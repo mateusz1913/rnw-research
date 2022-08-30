@@ -58,6 +58,10 @@
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-device-info\windows\RNDeviceInfoCPP\RNDeviceInfoCPP.vcxproj">
       <Project>{3e3931f2-4735-4417-8cb0-33668a7314d6}</Project>
     </ProjectReference>
+    <!-- Projects from react-native-fs -->
+    <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-fs\windows\RNFS\RNFS.vcxproj">
+      <Project>{4f89a807-a843-4df0-8d74-a04a3f48fef9}</Project>
+    </ProjectReference>
     <!-- Projects from react-native-linear-gradient -->
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-linear-gradient\windows\BVLinearGradient\BVLinearGradient\BVLinearGradient.vcxproj">
       <Project>{193df456-3f97-4cc1-a7d4-809857cc064e}</Project>
@@ -89,6 +93,10 @@
     <!-- Projects from react-native-track-player -->
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-track-player\windows\RNTrackPlayer\RNTrackPlayer.vcxproj">
       <Project>{CC51D49E-7FAB-42D2-825D-5E93AC57262C}</Project>
+    </ProjectReference>
+    <!-- Projects from react-native-tts -->
+    <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-tts\windows\RNTTS\RNTTS.vcxproj">
+      <Project>{B250B404-D1A2-4171-851E-E80BA031DAF0}</Project>
     </ProjectReference>
     <!-- Projects from react-native-video -->
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-video\windows\ReactNativeVideoCPP\ReactNativeVideoCPP.vcxproj">

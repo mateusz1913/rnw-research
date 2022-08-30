@@ -45,6 +45,9 @@
 // Includes from react-native-device-info
 #include <winrt/RNDeviceInfoCPP.h>
 
+// Includes from react-native-fs
+#include <winrt/RNFS.h>
+
 // Includes from react-native-linear-gradient
 #include <winrt/BVLinearGradient.h>
 
@@ -68,6 +71,9 @@
 
 // Includes from react-native-track-player
 #include <winrt/RNTrackPlayer.h>
+
+// Includes from react-native-tts
+#include <winrt/RNTTS.h>
 
 // Includes from react-native-video
 #include <winrt/ReactNativeVideoCPP.h>
@@ -108,6 +114,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::RNCConfig::ReactPackageProvider());
     // IReactPackageProviders from react-native-device-info
     packageProviders.Append(winrt::RNDeviceInfoCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-fs
+    packageProviders.Append(winrt::RNFS::ReactPackageProvider());
     // IReactPackageProviders from react-native-linear-gradient
     packageProviders.Append(winrt::BVLinearGradient::ReactPackageProvider());
     // IReactPackageProviders from react-native-localize
@@ -124,6 +132,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::RNSensitiveInfoCPP::ReactPackageProvider());
     // IReactPackageProviders from react-native-track-player
     packageProviders.Append(winrt::RNTrackPlayer::ReactPackageProvider());
+    // IReactPackageProviders from react-native-tts
+    packageProviders.Append(winrt::RNTTS::ReactPackageProvider());
     // IReactPackageProviders from react-native-video
     packageProviders.Append(winrt::ReactNativeVideoCPP::ReactPackageProvider());
     // IReactPackageProviders from react-native-webview

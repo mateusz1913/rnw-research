@@ -18,6 +18,16 @@ import { PermissionsScreen } from '../screens/PermissionsScreen';
 import { CameraScreen } from '../screens/CameraScreen';
 import { LinearGradientScreen } from '../screens/LinearGradientScreen';
 import { DeviceInfoScreen } from '../screens/DeviceInfoScreen';
+import { BlobUtilScreen } from '../screens/BlobUtilScreen';
+import { SliderScreen } from '../screens/SliderScreen';
+import { ProgressViewScreen } from '../screens/ProgressViewScreen';
+import { NetInfoScreen } from '../screens/NetInfoScreen';
+import { DateTimePickerScreen } from '../screens/DateTimePickerScreen';
+import { ClipboardScreen } from '../screens/ClipboardScreen';
+import { ExpanderScreen } from '../screens/ExpanderScreen';
+import { ConfigScreen } from '../screens/ConfigScreen';
+import { FSScreen } from '../screens/FSScreen';
+import { TextToSpeechScreen } from '../screens/TextToSpeechScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -63,6 +73,25 @@ export const NavigationStack: React.FC = () => {
         component={LinearGradientScreen}
       />
       <Stack.Screen name={ROUTES.DEVICE_INFO} component={DeviceInfoScreen} />
+      <Stack.Screen name={ROUTES.BLOB_UTIL} component={BlobUtilScreen} />
+      <Stack.Screen name={ROUTES.SLIDER} component={SliderScreen} />
+      <Stack.Screen
+        name={ROUTES.PROGRESS_VIEW}
+        component={ProgressViewScreen}
+      />
+      <Stack.Screen name={ROUTES.NETINFO} component={NetInfoScreen} />
+      <Stack.Screen
+        name={ROUTES.DATETIMEPICKER}
+        component={DateTimePickerScreen}
+      />
+      <Stack.Screen name={ROUTES.CLIPBOARD} component={ClipboardScreen} />
+      <Stack.Screen name={ROUTES.EXPANDER} component={ExpanderScreen} />
+      <Stack.Screen name={ROUTES.CONFIG} component={ConfigScreen} />
+      <Stack.Screen name={ROUTES.FS} component={FSScreen} />
+      <Stack.Screen
+        name={ROUTES.TEXT_TO_SPEECH}
+        component={TextToSpeechScreen}
+      />
     </Stack.Navigator>
   );
 };
