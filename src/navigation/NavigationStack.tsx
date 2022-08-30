@@ -32,6 +32,7 @@ import { PopupScreen } from '../screens/PopupScreen';
 import { XamlScreen } from '../screens/XamlScreen';
 import { SketchCanvasScreen } from '../screens/SketchCanvasScreen';
 import { PdfScreen } from '../screens/PdfScreen';
+import { PlatformColorScreen } from '../screens/PlatformColorScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -57,6 +58,10 @@ export const NavigationStack: React.FC = () => {
       />
       <Stack.Screen name={ROUTES.FLYOUT} component={FlyoutScreen} />
       <Stack.Screen name={ROUTES.POPUP} component={PopupScreen} />
+      <Stack.Screen
+        name={ROUTES.PLATFORM_COLOR}
+        component={PlatformColorScreen}
+      />
       <Stack.Screen name={ROUTES.VIDEO_AUDIO} component={VideoAudioScreen} />
       <Stack.Screen
         name={ROUTES.ASYNC_STORAGE}

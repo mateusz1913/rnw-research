@@ -13,6 +13,7 @@ export type RootStackParamList = {
   };
   [ROUTES.FLYOUT]: undefined;
   [ROUTES.POPUP]: undefined;
+  [ROUTES.PLATFORM_COLOR]: undefined;
   [ROUTES.VIDEO_AUDIO]: undefined;
   [ROUTES.ASYNC_STORAGE]: undefined;
   [ROUTES.SENSITIVE_INFO]: undefined;

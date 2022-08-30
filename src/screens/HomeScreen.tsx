@@ -80,6 +80,11 @@ export const HomeScreen: React.FC = () => {
       <Section onPress={navigateTo(ROUTES.POPUP)} title="Popup">
         Check Popup examples
       </Section>
+      <Section
+        onPress={navigateTo(ROUTES.PLATFORM_COLOR)}
+        title="PlatformColor">
+        Look at PlatformColor examples
+      </Section>
       <Section onPress={navigateTo(ROUTES.VIDEO_AUDIO)} title="AudioVideo">
         Listen audio with native component from react-native-video
       </Section>
