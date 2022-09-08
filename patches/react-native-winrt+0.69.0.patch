@@ -1,0 +1,23 @@
+diff --git a/node_modules/react-native-winrt/windows/WinRTTurboModule/WinRTTurboModule.vcxproj b/node_modules/react-native-winrt/windows/WinRTTurboModule/WinRTTurboModule.vcxproj
+index b7f9a26..0defb42 100644
+--- a/node_modules/react-native-winrt/windows/WinRTTurboModule/WinRTTurboModule.vcxproj
++++ b/node_modules/react-native-winrt/windows/WinRTTurboModule/WinRTTurboModule.vcxproj
+@@ -4,7 +4,7 @@
+   <PropertyGroup>
+     <RnWinRTPath>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..\..'))</RnWinRTPath>
+     <RnWinRTExe>$(RnWinRTPath)bin\rnwinrt.exe</RnWinRTExe>
+-    <CppWinRTDir>$(SolutionDir)\packages\Microsoft.Windows.CppWinRT.2.0.210505.3</CppWinRTDir>
++    <CppWinRTDir>$(SolutionDir)\packages\Microsoft.Windows.CppWinRT.2.0.210621.3</CppWinRTDir>
+   </PropertyGroup>
+   <Import Project="$(RnWinRTPath)module\WinRTTurboModule.props" />
+   <Import Project="$(CppWinRTDir)\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('$(CppWinRTDir)\build\native\Microsoft.Windows.CppWinRT.props')" />
+diff --git a/node_modules/react-native-winrt/windows/WinRTTurboModule/packages.config b/node_modules/react-native-winrt/windows/WinRTTurboModule/packages.config
+index 7b6dfc2..0577192 100644
+--- a/node_modules/react-native-winrt/windows/WinRTTurboModule/packages.config
++++ b/node_modules/react-native-winrt/windows/WinRTTurboModule/packages.config
+@@ -1,4 +1,4 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <packages>
+-  <package id="Microsoft.Windows.CppWinRT" version="2.0.210505.3" targetFramework="native" />
++  <package id="Microsoft.Windows.CppWinRT" version="2.0.210621.3" targetFramework="native" />
+ </packages>

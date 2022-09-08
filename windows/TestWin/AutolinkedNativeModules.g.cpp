@@ -87,6 +87,9 @@
 // Includes from react-native-webview
 #include <winrt/ReactNativeWebView.h>
 
+// Includes from react-native-winrt
+#include <winrt/WinRTTurboModule.h>
+
 // Includes from react-native-xaml
 #include <winrt/ReactNativeXaml.h>
 
@@ -151,6 +154,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
     packageProviders.Append(winrt::ReactNativeVideoCPP::ReactPackageProvider());
     // IReactPackageProviders from react-native-webview
     packageProviders.Append(winrt::ReactNativeWebView::ReactPackageProvider());
+    // IReactPackageProviders from react-native-winrt
+    packageProviders.Append(winrt::WinRTTurboModule::ReactPackageProvider());
     // IReactPackageProviders from react-native-xaml
     packageProviders.Append(winrt::ReactNativeXaml::ReactPackageProvider());
 }

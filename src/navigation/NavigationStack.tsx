@@ -33,6 +33,7 @@ import { XamlScreen } from '../screens/XamlScreen';
 import { SketchCanvasScreen } from '../screens/SketchCanvasScreen';
 import { PdfScreen } from '../screens/PdfScreen';
 import { PlatformColorScreen } from '../screens/PlatformColorScreen';
+import { WinRTScreen } from '../screens/WinRTScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -108,6 +109,7 @@ export const NavigationStack: React.FC = () => {
         component={SketchCanvasScreen}
       />
       <Stack.Screen name={ROUTES.PDF} component={PdfScreen} />
+      <Stack.Screen name={ROUTES.WINRT} component={WinRTScreen} />
     </Stack.Navigator>
   );
 };

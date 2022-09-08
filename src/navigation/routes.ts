@@ -27,6 +27,7 @@ export const ROUTES = Object.freeze({
   SKETCH_CANVAS: 'SKETCH_CANVAS',
   XAML: 'XAML', // Needs (probably) experimental version of WinUI; There were some issues with mismatched CppWinRT nuget versions
   PDF: 'PDF', // https://github.com/wonday/react-native-pdf/issues/683
+  WINRT: 'WINRT',
   // DO NOT WORK
   CLIPBOARD: 'CLIPBOARD',
   TRACK_PLAYER_AUDIO: 'TRACK_PLAYER_AUDIO', // NPM package has not exported windows code + windows code is not actively maintained

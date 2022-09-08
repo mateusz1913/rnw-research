@@ -7008,6 +7008,11 @@ react-native-windows@0.69.6:
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
 
+react-native-winrt@~0.69:
+  version "0.69.0"
+  resolved "https://registry.yarnpkg.com/react-native-winrt/-/react-native-winrt-0.69.0.tgz#1112868f821f1c28bd5e939add259c767c5bf79c"
+  integrity sha512-Uhw+9NVDyfyBGB78q3dTVlNHqfoPRIRJ4xMwwRgw4Hu2YkUcTz6BDvB1rZMn+oO38W4SoBIBEIsXE4Up6upnNg==
+
 react-native-xaml@^0.0.65:
   version "0.0.65"
   resolved "https://registry.yarnpkg.com/react-native-xaml/-/react-native-xaml-0.0.65.tgz#abfd51f436cc3c6a850bd7531a9c63e086e6aa24"

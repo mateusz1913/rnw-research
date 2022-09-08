@@ -34,6 +34,10 @@
     <UseExperimentalNuget>false</UseExperimentalNuget>
 
     <WinUI2xVersion>2.8.0-prerelease.210927001</WinUI2xVersion>
+
+    <RnWinRTParameters>
+        -include Windows.Security.Cryptography
+    </RnWinRTParameters>
   
   </PropertyGroup>
 

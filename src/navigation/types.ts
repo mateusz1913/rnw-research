@@ -36,6 +36,7 @@ export type RootStackParamList = {
   [ROUTES.XAML]: undefined;
   [ROUTES.SKETCH_CANVAS]: undefined;
   [ROUTES.PDF]: undefined;
+  [ROUTES.WINRT]: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;

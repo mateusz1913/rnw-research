@@ -161,6 +161,9 @@ export const HomeScreen: React.FC = () => {
       <Section onPress={navigateTo(ROUTES.PDF)} title="Pdf">
         Check Pdf view control with react-native-pdf
       </Section>
+      <Section onPress={navigateTo(ROUTES.WINRT)} title="WinRT">
+        Access native WinRT APIs projection with react-native-winrt
+      </Section>
     </Page>
   );
 };
