@@ -37,6 +37,9 @@ export type RootStackParamList = {
   [ROUTES.SKETCH_CANVAS]: undefined;
   [ROUTES.PDF]: undefined;
   [ROUTES.WINRT]: undefined;
+  [ROUTES.NATIVE_TOGGLE_BUTTON]: undefined;
+  [ROUTES.SVG]: undefined;
+  [ROUTES.VECTOR_ICONS]: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;

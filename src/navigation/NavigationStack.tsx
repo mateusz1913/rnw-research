@@ -34,6 +34,7 @@ import { SketchCanvasScreen } from '../screens/SketchCanvasScreen';
 import { PdfScreen } from '../screens/PdfScreen';
 import { PlatformColorScreen } from '../screens/PlatformColorScreen';
 import { WinRTScreen } from '../screens/WinRTScreen';
+import { ToggleButtonScreen } from '../screens/ToggleButtonScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -110,6 +111,10 @@ export const NavigationStack: React.FC = () => {
       />
       <Stack.Screen name={ROUTES.PDF} component={PdfScreen} />
       <Stack.Screen name={ROUTES.WINRT} component={WinRTScreen} />
+      <Stack.Screen
+        name={ROUTES.NATIVE_TOGGLE_BUTTON}
+        component={ToggleButtonScreen}
+      />
     </Stack.Navigator>
   );
 };

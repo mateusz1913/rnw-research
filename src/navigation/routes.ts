@@ -27,6 +27,9 @@ export const ROUTES = Object.freeze({
   SKETCH_CANVAS: 'SKETCH_CANVAS',
   XAML: 'XAML', // Needs (probably) experimental version of WinUI; There were some issues with mismatched CppWinRT nuget versions
   WINRT: 'WINRT',
+  NATIVE_TOGGLE_BUTTON: 'NATIVE_TOGGLE_BUTTON',
+  SVG: 'SVG',
+  VECTOR_ICONS: 'VECTOR_ICONS',
   // DO NOT WORK
   CLIPBOARD: 'CLIPBOARD',
   TRACK_PLAYER_AUDIO: 'TRACK_PLAYER_AUDIO', // NPM package has not exported windows code + windows code is not actively maintained

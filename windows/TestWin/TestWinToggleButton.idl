@@ -1,0 +1,7 @@
+namespace TestWin {
+    [default_interface]
+    runtimeclass TestWinToggleButton : Windows.UI.Xaml.Controls.Primitives.ToggleButton {
+        TestWinToggleButton(Microsoft.ReactNative.IReactContext context);
+        void UpdateProperties(Microsoft.ReactNative.IJSValueReader reader);
+    };
+}

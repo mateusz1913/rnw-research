@@ -174,6 +174,11 @@ export const HomeScreen: React.FC = () => {
         title="Navigation to native screen">
         Navigate to native XAML page (outside React Native RootView)
       </Section>
+      <Section
+        onPress={navigateTo(ROUTES.NATIVE_TOGGLE_BUTTON)}
+        title="Native ToggleButton">
+        Check ToggleButton control bridged as a native view
+      </Section>
     </Page>
   );
 };
