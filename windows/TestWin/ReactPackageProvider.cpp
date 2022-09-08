@@ -2,6 +2,8 @@
 #include "ReactPackageProvider.h"
 #include "NativeModules.h"
 
+#include "NativeNavigationModule.h"
+
 using namespace winrt::Microsoft::ReactNative;
 
 namespace winrt::TestWin::implementation

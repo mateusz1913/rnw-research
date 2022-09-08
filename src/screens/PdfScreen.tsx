@@ -1,17 +1,23 @@
 import * as React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import Pdf from 'react-native-pdf';
+import {
+  // Button,
+  // StyleSheet,
+  Text,
+  // View
+} from 'react-native';
+// import Pdf from 'react-native-pdf';
 
 import { Page } from '../components/Page';
 
 export const PdfScreen: React.FC = () => {
-  const pdfRef = React.useRef<Pdf>(null);
-  const [currentPage, setCurrentPage] = React.useState(0);
-  const [pageCount, setPageCount] = React.useState(0);
+  // const pdfRef = React.useRef<Pdf>(null);
+  // const [currentPage, setCurrentPage] = React.useState(0);
+  // const [pageCount, setPageCount] = React.useState(0);
 
   return (
     <Page>
-      <View style={styles.container}>
+      <Text>React Native Pdf has some c2039 compilation errors</Text>
+      {/* <View style={styles.container}>
         <Pdf
           ref={pdfRef}
           source={{
@@ -47,23 +53,23 @@ export const PdfScreen: React.FC = () => {
           }}
           title="Next page"
         />
-      </View>
+      </View> */}
     </Page>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'stretch',
-    flex: 1,
-  },
-  controls: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    padding: 20,
-  },
-  controlLabel: {
-    fontSize: 24,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     alignSelf: 'stretch',
+//     flex: 1,
+//   },
+//   controls: {
+//     alignItems: 'center',
+//     flexDirection: 'row',
+//     justifyContent: 'space-evenly',
+//     padding: 20,
+//   },
+//   controlLabel: {
+//     fontSize: 24,
+//   },
+// });

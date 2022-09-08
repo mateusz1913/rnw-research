@@ -13,6 +13,7 @@
 #include <UI.Xaml.Controls.h>
 #include <UI.Xaml.Markup.h>
 #include <UI.Xaml.Navigation.h>
+#include <winrt/Windows.UI.Xaml.Interop.h>
 
 #include <winrt/Microsoft.ReactNative.h>
 

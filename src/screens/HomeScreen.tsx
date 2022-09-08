@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useColorScheme, Text, StyleSheet, Pressable } from 'react-native';
 import { Page } from '../components/Page';
 import { COLORS } from '../constants/colors';
+import { NativeNavigationModule } from '../nativeModules/NativeNavigationModule';
 import { ROUTES } from '../navigation/routes';
 import { RootStackNavigationProp } from '../navigation/types';
 
@@ -52,6 +53,10 @@ export const HomeScreen: React.FC = () => {
     },
     [navigation],
   );
+
+  const navigateToNativeScreen = React.useCallback(() => {
+    NativeNavigationModule.navigateToNativePage();
+  }, []);
 
   return (
     <Page>
@@ -163,6 +168,11 @@ export const HomeScreen: React.FC = () => {
       </Section>
       <Section onPress={navigateTo(ROUTES.WINRT)} title="WinRT">
         Access native WinRT APIs projection with react-native-winrt
+      </Section>
+      <Section
+        onPress={navigateToNativeScreen}
+        title="Navigation to native screen">
+        Navigate to native XAML page (outside React Native RootView)
       </Section>
     </Page>
   );
