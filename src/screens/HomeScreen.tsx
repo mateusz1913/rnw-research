@@ -179,6 +179,12 @@ export const HomeScreen: React.FC = () => {
         title="Native ToggleButton">
         Check ToggleButton control bridged as a native view
       </Section>
+      <Section onPress={navigateTo(ROUTES.SVG)} title="SVG">
+        Try SVG with react-native-svg
+      </Section>
+      <Section onPress={navigateTo(ROUTES.VECTOR_ICONS)} title="Vector icons">
+        Try vector icons with react-native-vector-icons
+      </Section>
     </Page>
   );
 };

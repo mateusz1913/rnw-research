@@ -28,13 +28,13 @@ export const ROUTES = Object.freeze({
   XAML: 'XAML', // Needs (probably) experimental version of WinUI; There were some issues with mismatched CppWinRT nuget versions
   WINRT: 'WINRT',
   NATIVE_TOGGLE_BUTTON: 'NATIVE_TOGGLE_BUTTON',
-  SVG: 'SVG',
   VECTOR_ICONS: 'VECTOR_ICONS',
   // DO NOT WORK
   CLIPBOARD: 'CLIPBOARD',
   TRACK_PLAYER_AUDIO: 'TRACK_PLAYER_AUDIO', // NPM package has not exported windows code + windows code is not actively maintained
   PDF: 'PDF', // https://github.com/wonday/react-native-pdf/issues/683
   PRINT: 'PRINT',
+  SVG: 'SVG', // compilation errors
   // DOCUMENT_PICKER: 'DOCUMENT_PICKER', // CSharp
   // SQLITE_STORAGE: 'SQLITE_STORAGE', // CPP, but package is old
   // FILE_VIEWER: 'FILE_VIEWER', // CSharp

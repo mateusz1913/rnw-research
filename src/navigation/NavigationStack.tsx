@@ -35,6 +35,8 @@ import { PdfScreen } from '../screens/PdfScreen';
 import { PlatformColorScreen } from '../screens/PlatformColorScreen';
 import { WinRTScreen } from '../screens/WinRTScreen';
 import { ToggleButtonScreen } from '../screens/ToggleButtonScreen';
+import { SvgScreen } from '../screens/SvgScreen';
+import { VectorIconsScreen } from '../screens/VectorIconsScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -115,6 +117,8 @@ export const NavigationStack: React.FC = () => {
         name={ROUTES.NATIVE_TOGGLE_BUTTON}
         component={ToggleButtonScreen}
       />
+      <Stack.Screen name={ROUTES.SVG} component={SvgScreen} />
+      <Stack.Screen name={ROUTES.VECTOR_ICONS} component={VectorIconsScreen} />
     </Stack.Navigator>
   );
 };
