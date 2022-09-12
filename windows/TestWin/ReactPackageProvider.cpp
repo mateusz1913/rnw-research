@@ -3,6 +3,7 @@
 #include "NativeModules.h"
 
 #include "NativeNavigationModule.h"
+#include "NativeSplashScreenModule.h"
 #include "ToggleButtonViewManager.h"
 
 using namespace winrt::Microsoft::ReactNative;

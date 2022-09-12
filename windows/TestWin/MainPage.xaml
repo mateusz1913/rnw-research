@@ -15,5 +15,6 @@
             ComponentName="TestWin"
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
             MinHeight="400"/>
+        <local:TestWinSplashScreenControl />
     </Grid>
 </Page>

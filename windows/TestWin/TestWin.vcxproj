@@ -104,6 +104,11 @@
       <DependentUpon>NativePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="NativeSplashScreenModule.h" />
+    <ClInclude Include="TestWinSplashScreenControl.h">
+      <DependentUpon>TestWinSplashScreenControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="TestWinToggleButton.h">
       <DependentUpon>TestWinToggleButton.idl</DependentUpon>
     </ClInclude>
@@ -144,6 +149,11 @@
       <DependentUpon>NativePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="NativeSplashScreenModule.cpp" />
+    <ClCompile Include="TestWinSplashScreenControl.cpp">
+      <DependentUpon>TestWinSplashScreenControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="TestWinToggleButton.cpp">
       <DependentUpon>TestWinToggleButton.idl</DependentUpon>
     </ClCompile>
@@ -171,6 +181,10 @@
       <DependentUpon>NativePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
+    <Midl Include="TestWinSplashScreenControl.idl">
+      <DependentUpon>TestWinSplashScreenControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
     <Midl Include="TestWinToggleButton.idl" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TestWinSplashScreenControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

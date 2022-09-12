@@ -6,6 +6,7 @@
   <ItemGroup>
     <Midl Include="App.idl" />
     <Midl Include="TestWinToggleButton.idl" />
+    <Midl Include="TestWinSplashScreenControl.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -16,6 +17,8 @@
     <ClCompile Include="AutolinkedNativeModules.g.cpp" />
     <ClCompile Include="ToggleButtonViewManager.cpp" />
     <ClCompile Include="TestWinToggleButton.cpp" />
+    <ClCompile Include="TestWinSplashScreenControl.cpp" />
+    <ClCompile Include="NativeSplashScreenModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -25,6 +28,8 @@
     <ClInclude Include="AutolinkedNativeModules.g.h" />
     <ClInclude Include="ToggleButtonViewManager.h" />
     <ClInclude Include="TestWinToggleButton.h" />
+    <ClInclude Include="TestWinSplashScreenControl.h" />
+    <ClInclude Include="NativeSplashScreenModule.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -66,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
+    <Page Include="TestWinSplashScreenControl.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="NativePage.xaml" />

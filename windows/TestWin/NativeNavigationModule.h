@@ -12,7 +12,7 @@ namespace winrt::TestWin::implementation::NativeNavigationModule
 	{
 	public:
 		REACT_INIT(Initialize);
-		void NativeNavigationModule::Initialize(winrt::Microsoft::ReactNative::ReactContext const& reactContext) noexcept;
+		void Initialize(winrt::Microsoft::ReactNative::ReactContext const& reactContext) noexcept;
 
 		REACT_METHOD(NavigateToNativePage, L"navigateToNativePage");
 		void NavigateToNativePage() noexcept;

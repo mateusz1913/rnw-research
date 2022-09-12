@@ -1,0 +1,10 @@
+namespace TestWin
+{
+	[default_interface]
+	runtimeclass TestWinSplashScreenControl : Windows.UI.Xaml.Controls.UserControl
+	{
+		TestWinSplashScreenControl();
+
+		void RunFadeOutAnimation();
+	}
+}
